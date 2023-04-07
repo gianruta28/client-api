@@ -1,12 +1,12 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        App\Entity\User:
+        App\Entity\Client:
             algorithm: bcrypt
     providers:
         app_user_provider:
             entity:
-                class: App\Entity\User
+                class: App\Entity\Client
                 property: username
     firewalls:
         login:
@@ -14,7 +14,7 @@ security:
             stateless: true
             anonymous: true
             json_login:
-                check_path:               /api/auth/login
+                check_path:               /api/auth/login-check
                 success_handler:          lexik_jwt_authentication.handler.authentication_success
                 failure_handler:          lexik_jwt_authentication.handler.authentication_failure
         api:

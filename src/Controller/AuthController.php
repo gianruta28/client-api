@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller;
+use App\Entity\Client;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -46,12 +47,12 @@ class AuthController extends ApiController
     // }
 
     /**
-     * @Route("/api/auth/login", name="login-check", methods={"POST"})
-     * @param UserInterface $user
+     * @Route("/api/auth/login-check", name="login-check", methods={"POST"})
+     * @param Client $user
      * @param JWTTokenManagerInterface $JWTManager
      * @return JsonResponse
      */
-    public function loginAction(UserInterface $user, JWTTokenManagerInterface $JWTManager): JsonResponse
+    public function loginCheckAction(UserInterface  $user, JWTTokenManagerInterface $JWTManager): JsonResponse
     {
         return new JsonResponse(['token' => $JWTManager->create($user)]);
     }

@@ -6,11 +6,12 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  */
-class Client
+class Client implements UserInterface
 {
     /**
      * @ORM\Id
@@ -38,6 +39,11 @@ class Client
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="client")
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="array", nullable="true")
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -113,5 +119,32 @@ class Client
         }
 
         return $this;
+    }
+
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+
+    }
+
+    public function eraseCredentials()
+    {
+
     }
 }

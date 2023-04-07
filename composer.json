@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "*",
@@ -57,6 +57,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "compile": [
+            "@php bin/console lexik:jwt:generate-keypair --overwrite --quiet --env prod"
         ]
     },
     "conflict": {
@@ -69,7 +72,7 @@
         }
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "*",
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "symfony/maker-bundle": "^1.39"
     }
 }
