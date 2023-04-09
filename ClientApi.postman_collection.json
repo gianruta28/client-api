@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "86c3e416-ca66-4855-a568-f618905f51e6",
+		"name": "ClientApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2063284"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "XDEBUG_SESSION",
+						"value": "PHPSTORM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"client1\",\r\n    \"password\": \"pa$$w0rd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/auth/login-check",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login-check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"Holi\",\r\n    \"lastName\" :\"chao\",\r\n    \"city\": \"este\",\r\n    \"category\": \"Y\",\r\n    \"age\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User by Id (dont support query params)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "XDEBUG_SESSION",
+						"value": "PHPSTORM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/users/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"Holi\",\r\n        \"lastName\": \"chao\",\r\n        \"city\": \"aquel\",\r\n        \"category\": \"X\",\r\n        \"age\": 2,\r\n        \"active\": false,\r\n        \"client\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/users/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2ODA5ODUxMzcsImV4cCI6MTY4MDk4ODczNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiY2xpZW50MSJ9.i_HR8MbiH-BidsxKfjjthQ-xm_OM1rFBdhSrabZXN8Z5jFyfwFE6R8U7T69pXYGM6iSCxNCp5P73gTFZkONDEEqOBkOQRrc7NnOBLp-6cA0oTuSnI_jRaiVDFl6UJw_FvhvqhFzIUOAYpbtm1H_nrumcoguYhJVND02idvbH2d89kFwsf03rXGt9GjSuBBIReBZuYBaGxfjCQbmPfl3_65vU_nNmXcnfjdxQFkxBKGNKoPbojKYRF4lvnZlJEQNZ8FE9IaAk0QkVlAf2LEdj9JVAoSgYYqHelIIL-SDZ7SQwwbOmvLmGXbMSxdVhcwe0-_aSg23467_Ve7LiyA8Y3g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/users/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users (supports query params)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2ODA5OTkwMzMsImV4cCI6MTY4MTAwMjYzMywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiY2xpZW50MSJ9.RDgKgDzxn-DfNvFkYncJFsmEC5-0bbyhpDvMSvuXU_upJsD6QfN7mXmdH67tFuYvrIVrxpSmJn_3bo1f4_riSVzTqXikyRNHRcH2EjToff_ZjGAtEkbG5B4VkAddduyss0cPN2AQAv1VMfAEbtx8nrnhXjCoSO6Mr7-HqQ5t9WzPVCaWvGda4nP5DjvWb_OjoFZ1E8TjI7FDHSLYPBwDm5kAe1ObOl55lVNi7a4KPAzuIsHtB1Zkf6EnrUN3a0vzxkShPz8AmqLvBMK-G7z-cb5rfCA8oJIrZO3t_nJgLlTTN6iqaGB5KXKoNi4tujzPjNxUJceQf7qY2sfuQwK4Iw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "XDEBUG_SESSION",
+						"value": "PHPSTORM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/users?greaterThan_createdAt=2023-02-30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "equals_category",
+							"value": "X",
+							"disabled": true
+						},
+						{
+							"key": "equals_active",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "equals_name",
+							"value": "Holi,Holai",
+							"disabled": true
+						},
+						{
+							"key": "greaterThan_createdAt",
+							"value": "2023-02-30"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

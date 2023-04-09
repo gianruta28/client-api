@@ -120,14 +120,14 @@ class UserBusinessLayer
     private function checkParamsFormat($filterName, $operator, $filterValue){
 
         if($filterName != 'name' && $filterName != 'lastName' && $filterName != 'city' &&
-            $filterName != 'active' && $filterName != 'id' && $filterName != 'age' &&
+            $filterName != 'active' && $filterName != 'id' && $filterName != 'age' && $filterName != 'category' &&
             $filterName != 'createdAt' && $filterName != 'updatedAt' ){
             throw new BadRequestException('Wrong filters operators combination.');
         }
 
         if(($operator == 'greaterThan' || $operator == 'lessThan' ) &&
             (   $filterName == 'name' || $filterName == 'lastName' ||
-                $filterName == 'city' || $filterName == 'active'   )) {
+                $filterName == 'city' || $filterName == 'active'  || $filterName == 'category'  )) {
 
             throw new BadRequestException('Wrong filters operators combination.');
         }
