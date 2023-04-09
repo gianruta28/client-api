@@ -25,11 +25,12 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 WORKDIR /var/www/html
 
 COPY .docker/php/config/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chmod 775 /usr/local/bin/docker-entrypoint.sh
+RUN chmod 777 /usr/local/bin/docker-entrypoint.sh
 
 RUN chmod 777 -R /var/www/html
 
 EXPOSE 9003
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 CMD ["php-fpm"]

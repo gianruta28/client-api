@@ -19,10 +19,10 @@ if [ "$1" = 'php-fpm' ]; then
     php bin/console --no-interaction doctrine:migrations:migrate
     php bin/console  doctrine:fixtures:load --no-interaction
 
+	  php bin/console lexik:jwt:generate-keypair
 
 	fi
 
-	php bin/console lexik:jwt:generate-keypair
 
 
     # Specifies that nc should only scan for listening daemons
