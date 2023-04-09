@@ -97,6 +97,11 @@ fi
 ....
 ```
 ### Postman Collection
-The repository includes a postman collection JSON (ClientApi.postman_collection.json). This file imported in Postman has some requests prepared and to try the API
+The repository includes a postman collection JSON (ClientApi.postman_collection.json). This file imported in Postman has some requests prepared and to try the API. Since JWT is used for authentication you will need to set the JWT as following in the Postman Request (after receiving it from login request)
+
+![Postman JWT Token](.doc/postmantoken.png)
+
+In Authorization tab. Select Type Bearer Token and paste the JWT token received from login response
+
 ## Notice
 Stack was configured for developments purposes. Please do not consider deploying it on production as is, without previous review.
