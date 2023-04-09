@@ -22,6 +22,9 @@ if [ "$1" = 'php-fpm' ]; then
 
 	fi
 
+	php bin/console lexik:jwt:generate-keypair
+
+
     # Specifies that nc should only scan for listening daemons
     # without sending any data to them.
     until nc -z ${MYSQL_HOST} ${MYSQL_PORT}; do
