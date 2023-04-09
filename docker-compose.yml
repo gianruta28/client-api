@@ -29,6 +29,7 @@ services:
       context: .
       dockerfile: ./.docker/php/Dockerfile
     environment:
+      PHP_MEMORY_LIMIT: 512M
       APP_ENV: ${APP_ENV}
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
@@ -38,5 +39,7 @@ services:
     volumes:
       - .:/var/www/html:rw
       - ./.docker/php/logs:/app/var/logs:rw
+    expose:
+      - "9001"
     depends_on:
       - mysql

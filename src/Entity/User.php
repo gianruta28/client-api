@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,31 +22,37 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
+
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $category;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank
      */
     private $age;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
     private $active;
 
@@ -54,6 +62,7 @@ class User
     private $createdAt;
 
     /**
+     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -131,12 +140,12 @@ class User
         return $this;
     }
 
-    public function getActive(): ?string
+    public function getActive(): ?bool
     {
         return $this->active;
     }
 
-    public function setActive(string $active): self
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
@@ -177,5 +186,21 @@ class User
         $this->client = $client;
 
         return $this;
+    }
+
+    public function toJson(){
+        return [
+            'id' => $this->getId(),
+            'name' => $this->name,
+            'lastName' => $this->lastName,
+            'city' => $this->city,
+            'category' => $this->category,
+            'age' => $this->age,
+            'active' => $this->active,
+            'createdAt' => $this->getCreatedAt()->format('d-m-Y H:i:s'),
+            'updatedAt' => $this->getUpdatedAt() ? $this->getUpdatedAt()->format('d-m-Y H:i:s') : '',
+            'client' => $this->getClient()->getId()
+
+        ];
     }
 }
