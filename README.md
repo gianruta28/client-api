@@ -1,4 +1,4 @@
-# Docker Symfony 5 starter kit 
+# Client/User Basic API using a Docker Symfony 5 starter kit 
 
 This development stack includes Symfony 5/Webpack Encore, MySQL, Apache and PHP built with Docker containers using docker-compose tool.
 
@@ -7,12 +7,11 @@ This development stack includes Symfony 5/Webpack Encore, MySQL, Apache and PHP 
 - MySQL 8.0
 - Apache
 - PHP7-FPM 7.4
-- NodeJS 15.0 ([optional](#other))
 
 ## Installation
 1. Clone the repository, build services and create/Start containers:
 ```sh
-$ git clone https://github.com/KamilKubicki/docker-symfony-5.git
+$ git clone https://github.com/gianruta28/client-api.git
 $ cd docker-symfony-5
 $ docker-compose build
 $ docker-compose up -d
@@ -21,18 +20,6 @@ $ docker-compose up -d
 2. Visit http://127.0.0.1:8080/
 
 ![Symfony 5 localhost](.doc/symfony-localhost.png)
-
-
-3. Install additional frontend dependencies and watch for changes: 
-```sh
-$ docker-compose exec php yarn
-$ docker-compose exec php yarn watch
-```
-
-4. Docker Dashboard main info: 
-
-![Docker Images](.doc/docker-images.png)
-![Docker Containers](.doc/docker-containers.png)
 
 ## Folders structure
 
@@ -87,48 +74,29 @@ $ docker-compose exec php php bin/console cache:clear
 
 # Composer
 $ docker-compose exec php composer install
-
-# Yarn
-$ docker-compose exec php yarn
-$ docker-compose exec php yarn watch
 ```
 
 ## Other
-In this starter, Node and Yarn were installed directly in PHP container. However, NodeJS can be swiftly defined as separate service (for React/Vue frontend application etc.) as follow:
+In this starter, you can enable or disabled the insertion of data fixtures everytime the container starts.
+This is enabled by default. To disable it edit the docker/php/config/docker-entrypoint.sh file like this
 
-```diff
-# docker-compose.yml
 
-version: '3.8'
-services:
-    ...
-+  nodejs:
-+    build:
-+      context: .
-+      dockerfile: ./.docker/nodejs/Dockerfile
-+    environment:
-+      PHP_HOST: php
-+      PHP_PORT: 9000
-+    volumes:
-+      - .:/var/www/html:rw
-+    depends_on:
-+      - php
+```sh
+....
+if [ "$APP_ENV" != 'prod' ]; then
+		composer install --prefer-dist --no-interaction --optimize-autoloader
+
+    # Deleting and Creating db for insertion of data every time the container starts.
+    # Comment section to avoid this behavior
+    # Droping actual db and creating a new one
+    # php bin/console doc:database:drop --force
+    # php bin/console doc:database:create
+    # php bin/console --no-interaction doctrine:migrations:migrate
+    # php bin/console  doctrine:fixtures:load --no-interaction
+fi
+....
 ```
-```diff
-# .docker/php/config/Dockerfile
-
-ARG PHP_VERSION=7.4
-FROM php:${PHP_VERSION}-fpm-alpine
-RUN apk add --update \
-    zip \
-    unzip \
-    curl \
--    nodejs \
--    yarn
-...
-```
-
-<cite>Source: [Dockerfile](.doc/nodejs/Dockerfile), [docker-entrypoint.sh](.doc/nodejs/docker-entrypoint.sh)</cite>
-
+### Postman Collection
+The repository includes a postman collection JSON (ClientApi.postman_collection.json). This file imported in Postman has some requests prepared and to try the API
 ## Notice
 Stack was configured for developments purposes. Please do not consider deploying it on production as is, without previous review.
